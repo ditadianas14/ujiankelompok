@@ -1,14 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL, MySQLdb
 import bcrypt
-import mysql.connector
+#import mysql.connector
 import random, datetime, time
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = '127.0.0.1'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'DitaDianaSari14'
-app.config['MYSQL_DB'] = 'ac'
+app.config['SECRET_KEY'] = "^A%DJAJU^JJ123"
+app.config['MYSQL_HOST'] = 'DimasCahyoK.mysql.pythonanywhere-services.com'
+app.config['MYSQL_USER'] = 'DimasCahyoK'
+app.config['MYSQL_PASSWORD'] = 'ditakeren123'
+app.config['MYSQL_DB'] = 'DimasCahyoK$ac2'
+app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 
@@ -98,7 +100,7 @@ def registerusers():
 @app.route('/daftar', methods=["GET", "POST"])
 def daftar():
     if request.method == 'GET':
-        return render_template("daftar.html")    
+        return render_template("daftar.html")
     else:
         if  request.form['otp'] != 'kelompokdua':
             return render_template("daftar.html")
@@ -133,10 +135,10 @@ def monitorac():
 
 @app.route('/refreshdataac', methods=["GET", "POST"])
 def refreshdataac():
-     
+
         #ini kodingan masukin data
          for i in range(10):
-          
+
             now = datetime.datetime.now()
             date_time = now.strftime("%d/%m/%Y %H:%M:%S")
             time.sleep(1.5)
@@ -146,7 +148,7 @@ def refreshdataac():
             out_evp = in_evp + 30
             comp = random.randint (50,90)
             room = random.randint (27,35)
-            
+
             cur = mysql.connection.cursor()
             cur.execute("INSERT INTO monitoring_ac (datetime, in_conden, out_conden, in_evapor, out_evapor, compressor, ambient) VALUES (%s, %s, %s, %s, %s, %s, %s)", (date_time, in_con, out_con, in_evp, out_evp, comp, room))
             mysql.connection.commit()
@@ -161,7 +163,7 @@ def hapusdataac(id_data):
     return redirect(url_for('monitorac'))
 
 #AKHIR MONITOR AC
-            
+
 
 #MONITOR AC FOR USERS
 @app.route('/monitorac_users')
@@ -174,10 +176,10 @@ def monitorac_users():
 
 @app.route('/refreshdataac_users', methods=["GET", "POST"])
 def refreshdataac_users():
-     
+
         #ini kodingan masukin data
          for i in range(10):
-          
+
             now = datetime.datetime.now()
             date_time = now.strftime("%d/%m/%Y %H:%M:%S")
             time.sleep(1.5)
@@ -187,12 +189,12 @@ def refreshdataac_users():
             out_evp = in_evp + 30
             comp = random.randint (50,90)
             room = random.randint (27,35)
-            
+
             cur = mysql.connection.cursor()
             cur.execute("INSERT INTO monitoring_ac (datetime, in_conden, out_conden, in_evapor, out_evapor, compressor, ambient) VALUES (%s, %s, %s, %s, %s, %s, %s)", (date_time, in_con, out_con, in_evp, out_evp, comp, room))
             mysql.connection.commit()
             return redirect(url_for('monitorac_users'))
-   #AKHIR MONITOR AC FOR USERS 
+   #AKHIR MONITOR AC FOR USERS
 
 #MONITOR AC USERS2
 
@@ -218,10 +220,10 @@ def monitorac_admin2():
 
 @app.route('/insertdataac2', methods=["GET", "POST"])
 def inserthdataac2():
-     
+
         #ini kodingan masukin data
          for i in range(10):
-          
+
             now = datetime.datetime.now()
             date_time = now.strftime("%d/%m/%Y %H:%M:%S")
             time.sleep(1.5)
@@ -231,7 +233,7 @@ def inserthdataac2():
             out_evp = in_evp + 30
             comp = random.randint (50,90)
             room = random.randint (27,35)
-            
+
             cur = mysql.connection.cursor()
             cur.execute("INSERT INTO monitoring_ac (datetime, in_conden, out_conden, in_evapor, out_evapor, compressor, ambient) VALUES (%s, %s, %s, %s, %s, %s, %s)", (date_time, in_con, out_con, in_evp, out_evp, comp, room))
             mysql.connection.commit()
@@ -252,6 +254,6 @@ def about():
     return render_template('about.html')  # render a template
 
 
-if __name__ == '__main__':
-    app.secret_key = "^A%DJAJU^JJ123"
-    app.run(host='0.0.0.0', debug=True)
+#if __name__ == '__main__':
+    #app.secret_key = "^A%DJAJU^JJ123"
+    #app.run(host='0.0.0.0', debug=True)
