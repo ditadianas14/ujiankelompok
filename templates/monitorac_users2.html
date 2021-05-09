@@ -1,0 +1,19 @@
+{% for item in monitoring_ac %}
+
+{{item.id}}
+</br>
+{{ item.datetime}}
+</br>
+{{ item.in_conden }}
+</br>
+{{ item.out_conden }}
+</br>
+{{ item.in_evapor }}
+</br>
+{{ item.out_evapor }}
+</br>
+{{ item.compressor }}
+</br>
+{{ item.ambient }}
+<p>||</p>
+{% endfor %}

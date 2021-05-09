@@ -1,0 +1,63 @@
+{% extends 'layout.html' %} {% block title %} Home {% endblock %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+      <div class="container">
+        <div class="starter-template text-center">
+          <h1>Data Temperatur Part-Part AC</h1>
+
+          <table class="table table-striped" style="background-color: rgb(126, 223, 193)">
+            <thead>
+              <meta http-equiv="refresh" content="5" />
+              <tr>
+                <td>id</td>
+
+                <td>Date Time</td>
+                <td>In Condensor</td>
+                <td>Out Condensor</td>
+                <td>In Evaporator</td>
+                <td>Out Evaporator</td>
+                <td>Compressor</td>
+                <td>Ambient</td>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for item in monitoring_ac %}
+
+              <tr>
+                <td>{{item.id}}</td>
+
+                <td>{{ item.datetime }}</td>
+                <td>{{ item.in_conden }}</td>
+                <td>{{ item.out_conden }}</td>
+                <td>{{ item.in_evapor }}</td>
+                <td>{{ item.out_evapor }}</td>
+                <td>{{ item.compressor }}</td>
+                <td>{{ item.ambient }}</td>
+
+                <!-- Modal -->
+
+                {% else %}
+              </tr>
+
+              <tr>
+                <td colspan="3">Unbelievable. No entries here so far</td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- /.container -->
+
+      {% endblock %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
